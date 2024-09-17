@@ -22,10 +22,17 @@ class LoggingConfig(BaseModel):
     level: str
 
 
+class AiApiConfig(BaseModel):
+    key: str
+    url: str | None
+    model: str
+
+
 class Config(BaseModel):
     bot: BotConfig
     db: DBConfig
     logging: LoggingConfig
+    ai_api: AiApiConfig
 
     @classmethod
     def create(cls, config_file: str) -> 'Config':
@@ -34,5 +41,6 @@ class Config(BaseModel):
         return Config(
             bot=BotConfig(**data['bot']),
             db=DBConfig(**data['db']),
-            logging=LoggingConfig(**data['logging'])
+            logging=LoggingConfig(**data['logging']),
+            ai_api=AiApiConfig(**data['ai_api'])
         )

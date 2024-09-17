@@ -8,3 +8,7 @@ db:
     password: ''
 logging:
     level: 'INFO'
+ai_api:
+    key: ''
+    url: ''
+    model: ''
