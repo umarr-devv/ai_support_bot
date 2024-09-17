@@ -13,7 +13,7 @@ class AiApiClient:
         self.model = config.ai_api.model
 
     async def completion(self, query: str, system_promt: str = '',
-                         temperature: float = 0.7, max_tokens: int = 256):
+                         temperature: float = 0.7, max_tokens: int = 256) -> str:
         response = await self.client.chat.completions.create(
             messages=[
                 {
