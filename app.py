@@ -9,6 +9,7 @@ from src.config import Config
 from src.handlers import router
 from src.service.database import DataBase
 from src.utils.logs import set_logging
+from src.service.ai import AiApiClient
 from src.models import Base
 
 CONFIG_FILE = 'local-config.yml'
@@ -18,6 +19,7 @@ dp = Dispatcher(storage=MemoryStorage())
 database = DataBase(config=config)
 bot = Bot(token=config.bot.token,
           default=DefaultBotProperties(parse_mode=ParseMode.HTML))
+ai_client = AiApiClient(config)
 
 
 async def main():
@@ -26,7 +28,8 @@ async def main():
     dp.include_router(router)
 
     try:
-        await dp.start_polling(bot, sessions=database.sessions, config=config)
+        await dp.start_polling(bot, sessions=database.sessions,
+                               config=config, ai_client=ai_client)
     finally:
         await bot.session.close()
         await dp.storage.close()
