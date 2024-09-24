@@ -11,6 +11,6 @@ async def on_about_company(message: types.Message):
 
 
 @router.message(F.text == '❕ О боте')
-async def on_about_company(message: types.Message):
+async def on_about_bot(message: types.Message):
     text = 'Информация о боте'
     await message.answer(text=text)
